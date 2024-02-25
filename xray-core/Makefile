@@ -1,20 +1,22 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=Xray-core
-PKG_VERSION:=1.5.5
-PKG_RELEASE:=$(AUTORELEASE)
+PKG_NAME:=xray-core
+PKG_VERSION:=1.8.7
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/XTLS/Xray-core/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=3f8d04fef82a922c83bab43cac6c86a76386cf195eb510ccf1cc175982693893
+PKG_HASH:=e8f46177d792b89700f164ca28fbf1a3c7d95a3ecf98871cb0dd5e474b46a859
 
 PKG_MAINTAINER:=Tianling Shen <cnsztl@immortalwrt.org>
 PKG_LICENSE:=MPL-2.0
 PKG_LICENSE_FILES:=LICENSE
 
+PKG_BUILD_DIR:=$(BUILD_DIR)/Xray-core-$(PKG_VERSION)
 PKG_BUILD_DEPENDS:=golang/host
 PKG_BUILD_PARALLEL:=1
 PKG_USE_MIPS16:=0
+PKG_BUILD_FLAGS:=no-mips16
 
 GO_PKG:=github.com/xtls/xray-core
 GO_PKG_LDFLAGS:=-s -w
