@@ -8,13 +8,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=shadowsocksr-libev
 PKG_VERSION:=2.5.6
-PKG_RELEASE:=10
-
-PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/shadowsocksrr/shadowsocksr-libev
-PKG_SOURCE_DATE:=2018-03-07
-PKG_SOURCE_VERSION:=d63ff863800a5645aca4309d5dd5962bd1e95543
-PKG_MIRROR_HASH:=34308ed827a5dd4f4e35619914102d55b00604faa44fda051d1d25fb4a319325
+PKG_RELEASE:=12
 
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=LICENSE
@@ -34,7 +28,7 @@ define Package/shadowsocksr-libev/Default
     SUBMENU:=Web Servers/Proxies
     TITLE:=shadowsocksr-libev ssr-$(1)
     URL:=https://github.com/shadowsocksrr/shadowsocksr-libev
-    DEPENDS:=+libev +libsodium +libopenssl +libpthread +libpcre +libudns +zlib +libopenssl-legacy
+    DEPENDS:=+libev +libsodium +libopenssl +libpthread +libpcre2 +libudns +zlib
   endef
 
   define Package/shadowsocksr-libev-ssr-$(1)/install
@@ -59,14 +53,6 @@ CONFIGURE_ARGS += \
 
 TARGET_CFLAGS += -flto
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
-
-ifeq ($(CONFIG_GCC_VERSION_12),y)
-	TARGET_CFLAGS += -Wno-error=use-after-free
-endif
-
-ifeq ($(CONFIG_GCC_VERSION_13),y)
-	TARGET_CFLAGS += -Wno-error=use-after-free
-endif
 
 $(foreach component,$(SHADOWSOCKSR_COMPONENTS), \
   $(eval $(call BuildPackage,shadowsocksr-libev-ssr-$(component))) \
